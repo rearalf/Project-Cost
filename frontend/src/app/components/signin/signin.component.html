@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <div class="card">
+            <div class="card-header text-center">
+                <h3>SIGNIN</h3>
+            </div>
+            <div class="card-body">
+                <form (submit)="signIn()">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="far fa-envelope"></i> </span>
+                        </div>
+                        <input type="email" [(ngModel)]="user.email" name="email" class="form-control" placeholder="Email" aria-label="Email" required autofocus>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Password" aria-label="Email" required>
+                    </div>
+                    <button class="btn btn-primary btn-block">
+                        <i class="fas fa-sign-in-alt fa-lg"></i> SignIn
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
