@@ -84,29 +84,6 @@ router.get('/project', verifyToken, (req, res) => {
     ]);
 });
 
-router.get('/tasks', (req, res) => {
-    res.json([
-        {
-            _id: 1,
-            name: 'Task one',
-            description: 'Lorem ipsum',
-            date: '2019-11-17T20:39:05.211Z',
-        },
-        {
-            _id: 1,
-            name: 'Task two',
-            description: 'Lorem ipsum',
-            date: '2019-11-17T20:39:05.211Z',
-        },
-        {
-            _id: 1,
-            name: 'Task three',
-            description: 'Lorem ipsum',
-            date: '2019-11-17T20:39:05.211Z',
-        },
-    ]);
-});
-
 module.exports = router;
 
 function verifyToken(req, res, next) {
