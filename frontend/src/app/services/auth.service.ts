@@ -1,34 +1,35 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { Router } from '@angular/router'
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
-    providedIn: 'root'
+	providedIn: 'root',
 })
 export class AuthService {
+	constructor(private http: HttpClient, private router: Router) {}
 
-    private URL = 'http://localhost:4000/api';
+	signUpUser(user) {
+		return this.http.post<any>(environment.URL + '/signup', user);
+	}
 
-    constructor(private http: HttpClient, private router: Router) { }
+	signInUser(user) {
+		return this.http.post<any>(environment.URL + '/signin', user);
+	}
 
-    signUpUser(user) {
-        return this.http.post<any>(this.URL + '/signup', user)
-    }
+	loggedIn() {
+		if(!!localStorage.getItem('token') && localStorage.getItem('token') != 'undefined'){
+			return true
+		}
+		localStorage.removeItem('token');
+	}
 
-    signInUser(user) {
-        return this.http.post<any>(this.URL + '/signin', user)
-    }
+	getToken() {
+		return localStorage.getItem('token');
+	}
 
-    loggedIn() {
-        return !!localStorage.getItem('token')
-    }
-
-    getToken() {
-        return localStorage.getItem('token')
-    }
-
-    logout() {
-        localStorage.removeItem('token')
-        this.router.navigate(['/signin'])
-    }
+	logout() {
+		localStorage.removeItem('token');
+		this.router.navigate([ '/signin' ]);
+	}
 }

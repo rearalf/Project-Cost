@@ -13,6 +13,7 @@ import { IndexComponent } from './components/index/index.component';
 
 import { AuthGuard } from './auth.guard'
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { AddprojectComponent } from './components/addproject/addproject.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
         NavigationComponent,
         SignupComponent,
         SigninComponent,
-        IndexComponent
+        IndexComponent,
+        AddprojectComponent
     ],
     imports: [
         BrowserModule,
