@@ -13,13 +13,17 @@ export class AuthService {
 		return this.http.post<any>(environment.URL + '/signup', user);
 	}
 
+	userExists() {
+		return this.http.get<any>(environment.URL + '/signin');
+	}
+
 	signInUser(user) {
 		return this.http.post<any>(environment.URL + '/signin', user);
 	}
 
 	loggedIn() {
-		if(!!localStorage.getItem('token') && localStorage.getItem('token') != 'undefined'){
-			return true
+		if (!!localStorage.getItem('token') && localStorage.getItem('token') != 'undefined') {
+			return true;
 		}
 		localStorage.removeItem('token');
 	}

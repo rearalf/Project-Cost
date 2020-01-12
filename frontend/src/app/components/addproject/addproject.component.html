@@ -1,1 +1,27 @@
-<p>addproject works!</p>
+<div class="card">
+    <div class="card-header text-center">
+        <h3>Create Project</h3>
+    </div>
+    <form (submit)="addProject()">
+        <div class="card-body">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-font"></i> </span>
+                </div>
+                <input type="text" [(ngModel)]="project.title" name="title" class="form-control" placeholder="Title"
+                    autofocus required>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-list-ul"></i> </span>
+                </div>
+                <input type="text" [(ngModel)]="project.description" name="description" class="form-control"
+                    placeholder="Description" required>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <a (click)="return()" class="return btn btn-danger"><i class="fas fa-undo"></i> Cancel</a>
+            <button class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+        </div>
+    </form>
+</div>

@@ -8,3 +8,35 @@
         </a>
     </div>
 </div>
+
+<br>
+<br>
+
+<div *ngIf="projects && projects.length > 0; else noProjects">
+    <div class="row">
+        <div class="col-md-6 p-2" *ngFor="let project of projects">
+            <div class="card">
+                <div class="card-body">
+                    <h3>{{project.title}}</h3>
+                    <p>{{project.description}}</p>
+                </div>
+                <div class="col card-footer">
+                    <div class="float-left">
+                        {{project.date | date: 'short'}}
+                    </div>
+                    <div class="float-right">
+                        <a class="button-delete" (click)="delete(project._id)">
+                            <i class="fas fa-trash alert-danger"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #noProjects>
+    <div class="alert alert-danger">
+        There are currently no projects
+    </div>
+</ng-template>

@@ -22,6 +22,11 @@ export class SigninComponent implements OnInit {
 		if (this.authService.loggedIn()) {
 			this.router.navigate([ '/index' ]);
 		}
+		this.authService.userExists().subscribe(res => {
+			if (res.length < 0) {
+				this.router.navigate([ '/signup' ]);
+			}
+		});
 	}
 
 	signIn() {

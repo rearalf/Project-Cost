@@ -18,7 +18,11 @@ export class SignupComponent implements OnInit {
 
 	constructor(private authService: AuthService, private router: Router) {}
 
-	ngOnInit() {}
+	ngOnInit() {
+		if (this.authService.loggedIn()) {
+			this.router.navigate([ '/index' ]);
+		}
+	}
 
 	signUp() {
 		if (this.validator()) {
@@ -27,7 +31,7 @@ export class SignupComponent implements OnInit {
 					swal({
 						icon: 'success',
 						title: 'Success',
-						text: res.messege,
+						text: res.message,
 						timer: 1500,
 					});
 					this.router.navigate([ '/signin' ]);

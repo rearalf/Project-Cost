@@ -46,7 +46,7 @@ router.post('/signup', async (req, res) => {
 			newUser.password = await newUser.encryptPassword(password);
 			await newUser
 				.save()
-				.then(res.status(200).json({ messege: 'User successfully saved' }))
+				.then(res.status(200).json({ message: 'User successfully saved' }))
 				.catch(err => {
 					res.status(401).json({ message: 'Save failed', err });
 				});
@@ -81,13 +81,13 @@ router.get('/project', auth, async (req, res) => {
 });
 
 router.post('/project', auth, async (req, res) => {
-	const { name, description } = req.body;
-	const newProject = new Project({ name, description });
+	const { title, description } = req.body;
+	const newProject = new Project({ title, description });
 	await newProject
 		.save()
 		.then(res.status(200).json({ message: 'Project successfully saved' }))
 		.catch(err => {
-			res.status(401).json({ message: 'Save failed' });
+			res.status(401).json({ message: 'Save failed', err });
 		});
 });
 
