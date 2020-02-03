@@ -4,6 +4,7 @@
 
 export const environment = {
 	URL: 'http://localhost:4000/api',
+	//URL: 'https://project-cost-backend.herokuapp.com/api',
 	production: false,
 };
 

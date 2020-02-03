@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --output-path dist"
   },
   "private": true,
   "dependencies": {
@@ -20,17 +21,20 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@fortawesome/fontawesome-free": "^5.12.0",
+    "@sweetalert2/ngx-sweetalert2": "^7.3.0",
     "bootstrap": "^4.4.1",
     "bootswatch": "^4.4.1",
+    "express": "^4.17.1",
     "jquery": "^3.4.1",
+    "path": "^0.12.7",
     "rxjs": "~6.4.0",
-    "sweetalert": "^2.1.2",
+    "sweetalert2": "^9.7.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.22",
-    "@angular/cli": "^8.3.22",
+    "@angular-devkit/build-angular": "^0.803.23",
+    "@angular/cli": "^8.3.23",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",
     "@types/jasmine": "~3.3.8",
@@ -44,7 +48,7 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.5.1",
-    "protractor": "~5.4.0",
+    "protractor": "^5.4.3",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"

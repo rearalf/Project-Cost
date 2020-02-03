@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
 import { Router } from '@angular/router';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-addproject',
@@ -14,6 +14,18 @@ export class AddprojectComponent implements OnInit {
 		description: '',
 	};
 
+	Toast = Swal.mixin({
+		toast: true,
+		position: 'top-end',
+		showConfirmButton: false,
+		timer: 2000,
+		timerProgressBar: true,
+		onOpen: toast => {
+			toast.addEventListener('mouseenter', Swal.stopTimer);
+			toast.addEventListener('mouseleave', Swal.resumeTimer);
+		},
+	});
+
 	constructor(private projectService: ProjectService, private router: Router) {}
 
 	ngOnInit() {}
@@ -22,16 +34,14 @@ export class AddprojectComponent implements OnInit {
 		if (this.validator()) {
 			this.projectService.saveProject(this.project).subscribe(
 				res => {
-					swal({
+					this.Toast.fire({
 						icon: 'success',
-						title: 'Success',
-						text: res.message,
-						timer: 1000,
+						title: res.message,
 					});
 					this.router.navigate([ '/index' ]);
 				},
 				err => {
-					swal({
+					Swal.fire({
 						icon: 'error',
 						title: 'Error',
 						text: err.error.message,
@@ -44,7 +54,7 @@ export class AddprojectComponent implements OnInit {
 
 	validator() {
 		if (this.project.title == '') {
-			swal({
+			Swal.fire({
 				icon: 'error',
 				title: 'Error',
 				text: 'Title is empty',
@@ -53,7 +63,7 @@ export class AddprojectComponent implements OnInit {
 			return false;
 		}
 		else if (this.project.description == '') {
-			swal({
+			Swal.fire({
 				icon: 'error',
 				title: 'Error',
 				text: 'Description is empty',
@@ -65,27 +75,6 @@ export class AddprojectComponent implements OnInit {
 	}
 
 	return() {
-		swal({
-			icon: 'warning',
-			title: 'He wants to return?',
-			text: 'The data has not been saved',
-			buttons: {
-				cancel: {
-					text: 'Cancel',
-					value: false,
-					visible: true,
-					closeModal: true,
-				},
-				confirm: {
-					text: 'Return',
-					value: true,
-					visible: true,
-				},
-			},
-		}).then(value => {
-			if (value) {
-				this.router.navigate([ '/index' ]);
-			}
-		});
+		this.router.navigate([ '/index' ]);
 	}
 }

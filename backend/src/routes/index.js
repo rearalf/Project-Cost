@@ -23,7 +23,6 @@ router.get('/signup', async (req, res) => {
 
 // For register in the api
 router.post('/signup', async (req, res) => {
-	let vali = false;
 	const { name, email, password } = req.body;
 	const newUser = new User({ name, email, password });
 	const emailUser = await User.findOne({ email: email });

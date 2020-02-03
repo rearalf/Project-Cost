@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
-import swal from 'sweetalert';
-import { error } from 'protractor';
+import swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-signin',
@@ -15,6 +14,18 @@ export class SigninComponent implements OnInit {
 		email: '',
 		password: '',
 	};
+
+	Toast = swal.mixin({
+		toast: true,
+		position: 'top-end',
+		showConfirmButton: false,
+		timer: 2000,
+		timerProgressBar: true,
+		onOpen: toast => {
+			toast.addEventListener('mouseenter', swal.stopTimer);
+			toast.addEventListener('mouseleave', swal.resumeTimer);
+		},
+	});
 
 	constructor(private authService: AuthService, private router: Router) {}
 
@@ -33,11 +44,15 @@ export class SigninComponent implements OnInit {
 		if (this.validator()) {
 			this.authService.signInUser(this.user).subscribe(
 				res => {
+					this.Toast.fire({
+						icon: 'success',
+						text: ' Correct authentication'
+					});
 					localStorage.setItem('token', res.token);
 					this.router.navigate([ '/index' ]);
 				},
 				err => {
-					swal({
+					swal.fire({
 						icon: 'error',
 						title: 'Error',
 						text: err.error.message,
@@ -50,20 +65,16 @@ export class SigninComponent implements OnInit {
 
 	validator() {
 		if (this.user.email == '') {
-			swal({
+			this.Toast.fire({
 				icon: 'warning',
-				title: 'Warning',
-				text: 'Email is empty',
-				timer: 2000,
+				title: 'Email is empty',
 			});
 			return false;
 		}
 		if (this.user.password == '') {
-			swal({
+			this.Toast.fire({
 				icon: 'warning',
-				title: 'Warning',
-				text: 'Password is empty',
-				timer: 2000,
+				title: 'Password is empty',
 			});
 			return false;
 		}
